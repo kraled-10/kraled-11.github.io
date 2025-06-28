@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gallery</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+
+<script>
+  function openFullImg(img) {
+    fullImgBox.style.display = "flex";
+    fullImg.src = img;
+  }
+
+  function inquireMouseEnter() {
+    var closeBtn = document.getElementById("closeBtn");
+    closeBtn.style.backgroundColor = "rgb(239, 239, 239)";;
+    closeBtn.classList.add("shadow");
+  }
+
+  function inquireMouseLeave() {
+    var closeBtn = document.getElementById("closeBtn");
+    closeBtn.style.backgroundColor = "transparent";
+    closeBtn.classList.remove("shadow");
+  }
+</script>
+
+<style>
+  .gallery-img {
+    height: 300px;
+    object-fit: cover;
+    cursor: pointer;
+    border-bottom: 1px solid #222;
+  }
+
+  .gallery-card {
+    width: 100%;
+    border: 1px solid #333;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .full-img {
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1050;
+  }
+
+  .full-img img {
+    max-width: 90%;
+    max-height: 80%;
+    object-fit: contain;
+    border-radius: 10px;
+    border: 2px solid #444;
+  }
+
+  .full-img span {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+  }
+
+  .navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    cursor: default;
+  }
+</style>
+
+<body id="body">
+
+  <div class="container-fluid shadow">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="py-3 d-flex flex-row justify-content-between align-items-center">
+            <div class="h3">
+              Photos
+            </div>
+            <div class="d-flex flex-row align-items-center">
+              <a href="../index.html" class="nav-link mx-3 h2 fw-bold" style="font-size: 20px;">
+                Home
+              </a>
+              <button id="btnMode" onclick="changeMode()" class="ms-4 px-3 py-2 btn btn-dark">
+                Dark Mode
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="full-img" id="fullImgBox">
+    <span id="closeBtn" onmouseenter="inquireMouseEnter()" onmouseleave="inquireMouseLeave()">x</span>
+    <img src="" id="fullImg" alt="">
+  </div>
+
+  <div class="container my-3">
+    <div class="row g-3" id="container-row">
+    </div>
+  </div>
+
+  <script>
+
+    var mode = "Light";
+
+    function changeMode() {
+      var body = document.getElementById("body");
+      var btnMode = document.getElementById("btnMode");
+      mode = mode == "Light" ? "dark" : "Light";
+
+      var btnText = mode == "dark" ? "Light Mode" : "Dark Mode"
+      var btnClass = mode == "dark" ? "btn-light" : "btn-dark"
+
+      btnMode.classList.remove(["btn-light"], ["btn-dark"]);
+      btnMode.classList.add(btnClass);
+      btnMode.innerHTML = btnText;
+
+      body.setAttribute("data-bs-theme", mode);
+    }
+
+    var titles = ["Myself ", "Screenshot ", "Facebook", "Messenger", "Telegram", "Instagram", "Download", "Camera",];
+    var pictures = ["DP.jpg", "cp.jpg", "lionhead.jpg", "center right.jpg", "wri.JPG", "dog.jpg", "stone kingdom.jpg", "camera.jpg",]
+
+    var rowElement = document.getElementById("container-row");
+    for (var i = 0; i < titles.length; i++) {
+      rowElement.innerHTML += '<div class="col-6 col-sm-6 col-md-4 col-lg-3"><div class="card my-3 shadow rounded-5 overflow-hidden gallery-card" style="width: 100%;"><img src="img/' + pictures[i] + '" class="card-img-top gallery-img" alt="..." onclick="openFullImg(\'img/' + pictures[i] + '\')">' + '<div class="card-body"><h5 class="card-title">' + titles[i] + '</div ></div ></div > ';
+    }
+
+    var fullImgBox = document.getElementById("fullImgBox");
+    var fullImg = document.getElementById("fullImg");
+
+    document.getElementById("closeBtn").onclick = function () {
+      fullImgBox.style.display = "none";
+    };
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

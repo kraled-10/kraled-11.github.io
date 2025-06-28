@@ -1,0 +1,108 @@
+body {
+     font-family: 'Georgia', serif;
+}
+
+.navbar {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.navbar h2 {
+  color: white;
+}
+
+.navbar h2:hover {
+  color: gray;
+}
+
+.front-page {
+  background-image: url(../img/bagui3.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 160px 0;
+  color: white;
+  text-align: left;
+  height: 500px;
+}
+
+.front-page h1 {
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.card-wrapper {
+  position: relative;
+  height: 830px;
+  overflow: hidden;
+}
+
+.card {
+  height: 100%;
+}
+
+.card img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.slideshow {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.slide-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  animation: fadeSlide 9s infinite;
+}
+
+.slide-image:nth-child(1) {
+  animation-delay: 0s;
+}
+.slide-image:nth-child(2) {
+  animation-delay: 3s;
+}
+.slide-image:nth-child(3) {
+  animation-delay: 6s;
+}
+
+.slide-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+@keyframes fadeSlide {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  30% { opacity: 1; }
+  40% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+
+.info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px 15px;
+}
+
+#section-dark {
+  background: #111;
+  padding: 2rem 2rem;
+  text-align: center;
+}

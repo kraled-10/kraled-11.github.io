@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dragon Ball Z</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: white;
+        }
+
+        .picture-container {
+            width: 300px;
+            height: 400px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 5%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .picture-container img {
+            width: 50%;
+        }
+
+        .nav-link {
+            border-radius: 15px;
+            padding: 5px 10px;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .nav-link:hover {
+            background-color: rgb(226, 226, 32);
+            border-radius: 20px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body data-bs-theme="dark">
+
+    <div class="container-fluid py-5 text-center position-relative"
+        style="background: linear-gradient(#ffcc00, #ff9900);">
+        <div class="position-absolute top-0 start-0 m-3">
+            <a href="index.html" class="nav-link">
+                <h2 class="text-dark"><i class="fas fa-home me-2"></i>Back</h2>
+            </a>
+        </div>
+         <img src="dbzlogo-removebg-preview.png" class="img-fluid" alt="" style="max-width: 300px; height: auto;">
+    </div>
+
+
+
+
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card text-center rounded-5 shadow-lg mx-auto"
+                    style="max-width: 700px; background-color: #121212;">
+                    <div class="picture-container mt-4 mx-auto">
+                        <img src="" id="img" alt="">
+                    </div>
+                    <div class="card-body">
+                        <div class="mt-3 h4" id="name">Name</div>
+                        <div class="mt-3 text-light" id="race">Race</div>
+                        <div class="mt-3 text-info" id="baseKI">BaseKI</div>
+                        <div class="mt-3 text-danger mb-3" id="totalKI">TotalKI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const characterId = urlParams.get("id");
+
+        const getDbz = async () => {
+
+            const response = await fetch('https://dragonball-api.com/api/characters?limit=58');
+            const dbz = await response.json();
+            const match = dbz.items.find(character => character.id == characterId);
+
+            document.getElementById("name").innerHTML = match.name;
+            document.getElementById("race").innerHTML = match.race;
+            document.getElementById("baseKI").innerHTML = match.ki;
+            document.getElementById("totalKI").innerHTML = match.maxKi;
+            document.getElementById("img").src = match.image;
+        }
+        getDbz();
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
